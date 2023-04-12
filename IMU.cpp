@@ -53,7 +53,12 @@ IMU::IMU(float local_g_acc) {
 }
 
 bool IMU::read_accelerometer() {
-	uint8_t bytes_read = Wire.requestFrom(ACC_I2C_ADD, 7, ACC_STATUS_REG_A | (1 << 7), 1, true);
+	// uint8_t bytes_read = Wire.requestFrom(ACC_I2C_ADD, 7, ACC_STATUS_REG_A | (1 << 7), 1, true);
+	Wire.beginTransmission(ACC_I2C_ADD);
+	Wire.write(ACC_STATUS_REG_A | (1 << 7));
+	Wire.endTransmission(false);
+	Wire.requestFrom(ACC_I2C_ADD, 7);
+
 	acc_status = acc_status | Wire.read();
 	if ((uint8_t)(acc_status << 5) == 0b11100000) {
 		// new data available for accelerometer
@@ -76,7 +81,12 @@ bool IMU::read_accelerometer() {
 }
 
 bool IMU::read_gyro() {
-	uint8_t bytes_read = Wire.requestFrom(GYR_I2C_ADD, 7, GYR_STATUS_REG | (1 << 7), 1, true);
+	// uint8_t bytes_read = Wire.requestFrom(GYR_I2C_ADD, 7, GYR_STATUS_REG | (1 << 7), 1, true);
+	Wire.beginTransmission(GYR_I2C_ADD);
+	Wire.write(GYR_STATUS_REG | (1 << 7));
+	Wire.endTransmission(false);
+	Wire.requestFrom(GYR_I2C_ADD, 7);
+
 	gyr_status = gyr_status | Wire.read();
 	if ((uint8_t)(gyr_status << 5) == 0b11100000) {
 		// new data available for gyro
