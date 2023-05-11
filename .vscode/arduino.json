@@ -1,0 +1,6 @@
+{
+    "sketch": "examples/imu_test2/imu_test2.ino",
+    "configuration": "PartitionScheme=default,FlashFreq=80,UploadSpeed=921600,DebugLevel=none,EraseFlash=none",
+    "board": "esp32:esp32:node32s",
+    "port": "/dev/ttyUSB0"
+}
