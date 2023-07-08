@@ -122,7 +122,6 @@ bool IMU::read_accelerometer() {
 }
 
 bool IMU::read_gyro() {
-	// uint8_t bytes_read = Wire.requestFrom(GYR_I2C_ADD, 7, GYR_STATUS_REG | (1 << 7), 1, true);
 	Wire.beginTransmission(GYR_I2C_ADD);
 	Wire.write(GYR_STATUS_REG | (1 << 7));
 	Wire.endTransmission(false);
